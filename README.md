@@ -1,2 +1,1 @@
-# DPG-Project
-This is where all codes related to the DPG project will be entered
+--This is the general description of our project and application.
