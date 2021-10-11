@@ -1,1 +1,6 @@
 --This is where our main code will be at. Feel free to change a type of code if you feel like there's a better solution, but be sure to alert the members of your changes.
+
+--Used to create the Career Guidance application database.
+USE master
+GO
+CREATE DATABASE Career_Guidance_Application
