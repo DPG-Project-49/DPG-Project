@@ -4,3 +4,10 @@
 USE master
 GO
 CREATE DATABASE Career_Guidance_Application
+
+--Creating the table System
+CREATE TABLE System (
+System_id INT PRIMARY KEY NOT NULL,
+System_name CHAR(50) NOT NULL
+);
+
