@@ -10,4 +10,44 @@ CREATE TABLE System (
 System_id INT PRIMARY KEY NOT NULL,
 System_name CHAR(50) NOT NULL
 );
-
+--Creating the rest of the tables
+CREATE TABLE Account (
+	Account_id INT PRIMARY KEY NOT NULL,
+	System_id INT FOREIGN KEY REFERENCES System (System_id) NOT NULL,
+	Account_name char(50) NOT NULL,
+	Date_of_birth DATE NOT NULL,
+	Email_address VARCHAR(50) NOT NULL,
+	Intrests CHAR(100) NOT NULL
+);
+CREATE TABLE School_learner (
+	Learner_id INT PRIMARY KEY NOT NULL,
+	Account_id INT FOREIGN KEY REFERENCES Account (Account_id) NOT NULL,
+	School_name CHAR(50) NOT NULL,
+	School_grade INT NOT NULL
+);
+CREATE TABLE University_student (
+	Student_id INT PRIMARY KEY NOT NULL,
+	Account_id INT FOREIGN KEY REFERENCES Account (Account_id) NOT NULL,
+	University_name CHAR(50) NOT NULL,
+	Year_of_study TINYINT NOT NULL,
+	Mode_of_study CHAR(50) NOT NULL,
+	Type_of_course VARCHAR(50) NOT NULL
+);
+CREATE TABLE Job_Seeker	(
+	Identification_id INT PRIMARY KEY NOT NULL,
+	Account_id INT FOREIGN KEY REFERENCES Account (Account_id) NOT NULL,
+	Place_of_work CHAR(50) NOT NULL, 
+	Income_earned MONEY NOT NULL,
+	Qualifications_earned CHAR(50) NOT NULL
+);
+CREATE TABLE Non_Functional_Requirements (
+	Programme_id INT PRIMARY KEY NOT NULL,
+	System_id INT FOREIGN KEY REFERENCES System (System_id) NOT NULL,
+	Programme_name CHAR(50) NOT NULL,
+	Is_scalable BIT NOT NULL,
+	Is_recoverable BIT NOT NULL,
+	Is_secure BIT NOT NULL,
+	Is_regulatory BIT NOT NULL,
+	Is_available BIT NOT NULL,
+	Is_capacity BIT NOT NULL
+);
