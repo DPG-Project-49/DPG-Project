@@ -5,6 +5,9 @@ USE master
 GO
 CREATE DATABASE Career_Guidance_Application
 
+USE Career_Guidance_Application
+GO
+
 --Creating the table System
 CREATE TABLE System (
 System_id INT PRIMARY KEY NOT NULL,
