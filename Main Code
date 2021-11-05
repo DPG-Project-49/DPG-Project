@@ -22,13 +22,13 @@ CREATE TABLE Account (
 	Email_address VARCHAR(50) NOT NULL,
 	Intrests CHAR(100) NOT NULL
 );
-CREATE TABLE School_learner (
+CREATE TABLE School_Learner (
 	Learner_id INT PRIMARY KEY NOT NULL,
 	Account_id INT FOREIGN KEY REFERENCES Account (Account_id) NOT NULL,
 	School_name CHAR(50) NOT NULL,
 	School_grade INT NOT NULL
 );
-CREATE TABLE University_student (
+CREATE TABLE University_Student (
 	Student_id INT PRIMARY KEY NOT NULL,
 	Account_id INT FOREIGN KEY REFERENCES Account (Account_id) NOT NULL,
 	University_name CHAR(50) NOT NULL,
@@ -37,7 +37,7 @@ CREATE TABLE University_student (
 	Type_of_course VARCHAR(50) NOT NULL
 );
 CREATE TABLE Job_Seeker	(
-	Identification_id INT PRIMARY KEY NOT NULL,
+	Identification_num INT PRIMARY KEY NOT NULL,
 	Account_id INT FOREIGN KEY REFERENCES Account (Account_id) NOT NULL,
 	Place_of_work CHAR(50) NOT NULL, 
 	Income_earned MONEY NOT NULL,
