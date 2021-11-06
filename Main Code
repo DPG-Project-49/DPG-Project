@@ -57,6 +57,8 @@ CREATE TABLE Non_Functional_Requirements (
 --adding constraint to avoid duplicate enteries in emails 
 alter table Account 
  add constraint email_id UNIQUE (Account_id,Email_address);
+ 
+ ---creating insert/delete/update/select procuders for the following tables Job_Seekers,Account,University_student,School_learner
  Use master
  go
 create procedure [dbo].[Accountinsertupdatedelete]
@@ -105,5 +107,53 @@ As
 			begin
 				delete from Account
 				where Account_id = @A_id
+			end
+		end;
+
+Use master
+ go
+
+create procedure Job_Seekerinsertupdatedelete
+                                             (@A_id int,
+											  @I_id int,
+											  @placeofwork char(50),
+											  @IncomeEarned money,
+											  @QualificationEarned char(50),
+											  @StatmentType NVARCHAR(20)= '')
+As
+	begin
+		if @StatmentType = 'Insert'
+			begin
+				insert into Job_Seeker
+							(Identification_id,
+						     Account_id,
+							 Place_of_work,
+							 Income_earned,
+							 Qualifications_earned)
+				values (@I_id,
+						@A_id,
+						@placeofwork,
+						@IncomeEarned,
+						@QualificationEarned)
+			end
+
+		if @StatmentType = 'Select'
+			begin
+				select *
+				from Job_Seeker
+			end
+		if @StatmentType = 'Update'
+			begin
+				UPDATE Job_Seeker
+				set Account_id = @A_id,
+					Place_of_work = @placeofwork,
+					Income_earned = @IncomeEarned,
+					Qualifications_earned = @QualificationEarned
+				where Identification_id = @I_id
+			end
+		else if @StatmentType = 'Delete'
+			begin
+				delete from Job_Seeker
+				where Identification_id = @I_id
 			end
 		end;
