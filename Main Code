@@ -37,7 +37,7 @@ CREATE TABLE University_Student (
 	Type_of_course VARCHAR(50) NOT NULL
 );
 CREATE TABLE Job_Seeker	(
-	Identification_num INT PRIMARY KEY NOT NULL,
+	Identification_id INT PRIMARY KEY NOT NULL,
 	Account_id INT FOREIGN KEY REFERENCES Account (Account_id) NOT NULL,
 	Place_of_work CHAR(50) NOT NULL, 
 	Income_earned MONEY NOT NULL,
@@ -54,3 +54,56 @@ CREATE TABLE Non_Functional_Requirements (
 	Is_available BIT NOT NULL,
 	Is_capacity BIT NOT NULL
 );
+--adding constraint to avoid duplicate enteries in emails 
+alter table Account 
+ add constraint email_id UNIQUE (Account_id,Email_address);
+ Use master
+ go
+create procedure [dbo].[Accountinsertupdatedelete]
+                                                                                         (@A_id int,
+											  @S_id int,
+											  @name varchar(50),
+											  @Dat_of_Birth date,
+											  @email_address varchar(50),
+											  @intrests varchar(100),
+											  @StatmentType NVARCHAR(20)= '')
+As
+	begin
+		if @StatmentType = 'Insert'
+			begin
+				insert into Account
+							(Account_id,
+							 System_id,
+						     Account_name,
+							 Date_of_birth,
+							 Email_address,
+							 Intrests)
+				values (@A_id,
+						@S_id,
+						@name,
+						@Dat_of_Birth,
+						@email_address,
+						@intrests)
+			end
+
+		if @StatmentType = 'Select'
+			begin
+				select *
+				from Account
+			end
+		if @StatmentType = 'Update'
+			begin
+				UPDATE Account
+				set Account_name = @name,
+					System_id = @S_id,
+					Date_of_birth = @Dat_of_Birth,
+					Email_address = @email_address,
+					Intrests = @intrests
+				where Account_id = @A_id
+			end
+		else if @StatmentType = 'Delete'
+			begin
+				delete from Account
+				where Account_id = @A_id
+			end
+		end;
