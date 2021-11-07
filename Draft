@@ -210,7 +210,18 @@
 	         DELETE FROM Job_Seeker
 		 WHERE id = @id
     END                        
-END                         
+END 
+
+CREATE TRIGGER tr_tbleAccount
+   ON tblAccount
+   FOR INSERT
+   AS BEGIN
+           DECLARE @Id int
+	   Select @Id = Id from inserted
+	   
+	   INSERT INTO tbleAccountIncome_earned
+	   
+               
                          
                          
           
