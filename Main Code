@@ -253,3 +253,66 @@ As
 				where Student_id = @S_id
 			end
 		end;
+
+Use Career_Guidance_Application
+go
+create table System_Backup (
+	Backup_id INT primary key not null,
+    System_id INT NOT NULL,
+	system_name CHAR(50) NOT NULL
+);
+
+CREATE TABLE Account_backup (
+	Account_id INT PRIMARY KEY NOT NULL,
+	System_id INT FOREIGN KEY REFERENCES System (System_id) NOT NULL,
+	Account_name char(50) NOT NULL,
+	Date_of_birth DATE NOT NULL,
+	Email_address VARCHAR(50) NOT NULL,
+	Intrests CHAR(100) NOT NULL
+);
+CREATE TABLE School_learner_backup (
+	Learner_id INT PRIMARY KEY NOT NULL,
+	Account_id INT FOREIGN KEY REFERENCES Account (Account_id) NOT NULL,
+	School_name CHAR(50) NOT NULL,
+	School_grade INT NOT NULL
+);
+CREATE TABLE University_student_backup (
+	Student_id INT PRIMARY KEY NOT NULL,
+	Account_id INT FOREIGN KEY REFERENCES Account (Account_id) NOT NULL,
+	University_name CHAR(50) NOT NULL,
+	Year_of_study TINYINT NOT NULL,
+	Mode_of_study CHAR(50) NOT NULL,
+	Type_of_course VARCHAR(50) NOT NULL
+);
+CREATE TABLE Job_Seeker_backup	(
+	Identification_id INT PRIMARY KEY NOT NULL,
+	Account_id INT FOREIGN KEY REFERENCES Account (Account_id) NOT NULL,
+	Place_of_work CHAR(50) NOT NULL, 
+	Income_earned MONEY NOT NULL,
+	Qualifications_earned CHAR(50) NOT NULL
+);
+CREATE TABLE Non_Functional_Requirements_backup (
+	Programme_id INT PRIMARY KEY NOT NULL,
+	System_id INT FOREIGN KEY REFERENCES System (System_id) NOT NULL,
+	Programme_name CHAR(50) NOT NULL,
+	Is_scalable BIT NOT NULL,
+	Is_recoverable BIT NOT NULL,
+	Is_secure BIT NOT NULL,
+	Is_regulatory BIT NOT NULL,
+	Is_available BIT NOT NULL,
+	Is_capacity BIT NOT NULL
+);
+
+create trigger backup_insert
+	on system
+	after insert as
+	begin
+		insert into System_backup (system_id, System_name)
+		select system_id, System_name from inserted
+
+		update System
+		set Backup_id = MP.backup_id
+		from System
+		inner join inserted i on i.System_id = System.System_id
+		inner join System_Backup MP on MP.System_id = System.System_id
+	end
