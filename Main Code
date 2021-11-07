@@ -114,7 +114,7 @@ Use master
  go
 
 create procedure Job_Seekerinsertupdatedelete
-                                             (@A_id int,
+                                                                                         (@A_id int,
 											  @I_id int,
 											  @placeofwork char(50),
 											  @IncomeEarned money,
@@ -155,5 +155,101 @@ As
 			begin
 				delete from Job_Seeker
 				where Identification_id = @I_id
+			end
+		end;
+
+Use master
+go
+
+create procedure School_learnerinsertupdatedelete
+                                                                                         (@A_id int,
+											  @L_id int,
+											  @schoolname char(50),
+											  @schoolgrade int,
+											  @StatmentType NVARCHAR(20)= '')
+As
+	begin
+		if @StatmentType = 'Insert'
+			begin
+				insert into School_learner
+							(Learner_id,
+						     Account_id,
+							 School_name,
+							 School_grade)
+				values (@L_id,
+						@A_id,
+						@schoolname,
+						@schoolgrade)
+			end
+
+		if @StatmentType = 'Select'
+			begin
+				select *
+				from School_learner
+			end
+		if @StatmentType = 'Update'
+			begin
+				UPDATE School_learner
+				set Account_id = @A_id,
+					School_name = @schoolname,
+					School_grade = @schoolgrade
+				where Learner_id = @L_id
+			end
+		else if @StatmentType = 'Delete'
+			begin
+				delete from School_learner
+				where Learner_id = @L_id
+			end
+		end;
+
+Use master
+go
+
+create procedure Universty_studentinsertupdatedelete
+                                                                                         (@A_id int,
+											  @S_id int,
+											  @UniversityName char(50),
+											  @yearofstudy tinyint,
+											  @modeofstudy char (50),
+											  @typeofcourse varchar (50),
+											  @StatmentType NVARCHAR(20)= '')
+As
+	begin
+		if @StatmentType = 'Insert'
+			begin
+				insert into University_student
+							(Student_id,
+						     Account_id,
+							 University_name,
+							 Year_of_study,
+							 Mode_of_study,
+							 Type_of_course)
+				values (@S_id,
+						@A_id,
+						@UniversityName,
+						@yearofstudy,
+						@modeofstudy,
+						@typeofcourse)
+			end
+
+		if @StatmentType = 'Select'
+			begin
+				select *
+				from University_student
+			end
+		if @StatmentType = 'Update'
+			begin
+				UPDATE University_student
+				set Account_id = @A_id,
+					University_name = @UniversityName,
+					Year_of_study = @yearofstudy,
+					Mode_of_study = @modeofstudy,
+					Type_of_course = @typeofcourse
+				where Student_id = @S_id
+			end
+		else if @StatmentType = 'Delete'
+			begin
+				delete from University_student
+				where Student_id = @S_id
 			end
 		end;
