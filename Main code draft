@@ -1,0 +1,216 @@
+ Use master
+ go
+ 
+ INSERT INTO system
+ VALUES  (    ,'   ');
+ 
+ INSERT INTO account
+ VALUES  (667423,   ,'  ',' ',' ',' ');
+ 
+ INSERT INTO school_learner
+ VALUES  (02030600946, 6674,'Windhoek High School ', 12);
+ 
+ INSERT INTO university_student
+ VALUES  (00100100564, 3211,'University of Science and Technology', 1,'full-time','Bachelor of Science');
+ 
+ INSERT INTO job_seeker
+ VALUES  (99072200342, 4567,'Windhoek',4500,'Masters Degree in Computer Science' );
+ 
+ Use master
+ go
+ 
+ ALTER PROCEDURE Accountinsertselectupdatedelete  (@A_id int,
+	                                           @S_id int,
+					           @S_id int,
+						   @name varchar(50),
+					           @Date_of_Birth date,
+	                                           @email_address varchar(50),
+                                                   @intrests varchar(100),
+					           @StatmentType NVARCHAR(20)= '')
+ 				                       											                      
+ AS
+    BEGIN
+          IF @StatementType = 'Insert'
+             BEGIN
+                  INSERT INTO Account
+                             (account_id,
+                              system_id,
+                              Account_name,
+                              Date_of_Birth,
+                              email_address,
+                              interests)
+                       VALUES(@A_id,
+                              @S_id,
+                              @name,
+                              @Date_of_Birth,
+                              @email_address varchar
+                              @interests
+ END
+         IF @StatementType = 'Select'
+            BEGIN
+                  SELECT*
+                      FROM Account
+ END
+         IF @StatementType = 'Update'
+            BEGIN
+                 UPDATE Account
+                 SET   Account_name = @name,
+                       Date_of_Birth = @Date_of_Birth,
+                       email_address = @email_address varchar,
+                       interests = @interests
+                WHERE id = @id
+ END
+         IF @StatementType = 'Delete'
+	     BEGIN 
+	         DELETE FROM Account
+		 WHERE id = @id
+ END
+   
+ Use master
+ go
+ 
+ ALTER PROCEDURE School_Learnerinsertselectupdatedelete (@A_id int,
+			                                 @L_id int,
+							 @schoolName char(50),
+				                         @schoolGrade int,
+							 @StatmentType NVARCHAR(20)= '')
+  AS
+    BEGIN
+          IF @StatementType = 'Insert'
+             BEGIN
+                  INSERT INTO School_Learner
+                             (Account_id,
+                              Learner_id,
+                              School_name,
+                              School_grade,
+                       VALUES(@A_id,
+                              @L_id,
+                              @SchoolName,
+                              @SchoolGrade
+                              
+ END
+         IF @StatementType = 'Select'
+            BEGIN
+                  SELECT*
+                      FROM School_Learner
+ END
+         IF @StatementType = 'Update'
+            BEGIN
+                 UPDATE School_Learner
+                 SET   Account_id = @A_id,
+                       Learner_id = @L_id,
+                       School_name = @schoolName,
+                       School_grade = @schoolGrade
+                WHERE id = @id
+ END
+         IF @StatementType = 'Delete'
+	     BEGIN 
+	         DELETE FROM School_Learner
+		 WHERE id = @id
+ END                              
+ 
+ Use master
+ go
+ 
+ ALTER PROCEDURE University_Studentinsertselectupdatedelete  (@A_id int,
+                                                              @S_id int,
+							      @UniversityName char(50),
+						              @YearofStudy tinyint,
+							      @ModeofStudy char (50),
+							      @TypeofCourse varchar (50),
+							      @StatmentType NVARCHAR(20)= '')
+											 
+  
+											  
+  AS
+    BEGIN
+          IF @StatementType = 'Insert'
+             BEGIN
+                  INSERT INTO University_Student
+                             (Account_id,
+                              Student_id,
+                              University_Name,
+                              Year_of_Study,
+			      Mode_of_Study ,
+			      Type_of_Course ,
+		       VALUES(@A_id,
+                              @S_id,
+                              @UniversityName,
+                              @YearofStudy,
+			      @ModeofStudy,
+			      @TypeofCourse
+                              
+ END
+         IF @StatementType = 'Select'
+            BEGIN
+                  SELECT*
+                      FROM University_student
+ END
+         IF @StatementType = 'Update'
+            BEGIN
+                 UPDATE University_student
+                 SET   Account_id = @A_id,
+                       Student = @S_id,
+                       University_Name = @UniversityName,
+                       Year_of_Study = @YearofStudy,
+		       Mode_of_Study = @ModeofStudy,
+		       Type_of_Course = @TypeofCourse
+		       
+		       
+                WHERE id = @id
+ END
+         IF @StatementType = 'Delete'
+	     BEGIN 
+	         DELETE FROM University_student
+		 WHERE id = @id
+ END       
+ Use master
+ go
+ 
+ ALTER PROCEDURE Job_Seekerinsertselectupdatedelete (@I_num int,
+	                                             @placeofwork char(50),
+					             @IncomeEarned money,
+						     @QualificationEarned char(50),
+					             @StatmentType NVARCHAR(20)= '')
+ 				                     
+											  
+ AS
+    BEGIN
+          IF @StatementType = 'Insert'
+             BEGIN
+                  INSERT INTO Job_Seeker
+                             (Identification_num,
+			      Account_id,
+                              Place_of_work,
+                              Income_earned,
+                              Qualifications_earned) 
+                       VALUES(@I_num,
+                              @A_id,
+                              @Placeofwork,
+                              @QualificationEarned,
+                              
+ END
+         IF @StatementType = 'Select'
+            BEGIN
+                  SELECT*
+                      FROM Job_Seeker
+ END
+         IF @StatementType = 'Update'
+            BEGIN
+                 UPDATE Job_Seeker
+                        SET   Identification_num
+			      Account_id
+                              Place_of_work,
+                              Income_earned,
+                              Qualifications_earned
+                   WHERE id = @id
+ END
+         IF @StatementType = 'Delete'
+	     BEGIN 
+	         DELETE FROM Job_Seeker
+		 WHERE id = @id
+    END                        
+END                         
+                         
+                         
+          
